@@ -1,0 +1,90 @@
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var languages = [{ "id": "af", "name": "Afrikaans" },
+    { "id": "en", "name": "English" },
+    { "id": "ru", "name": "Russian" }
+];
+var menus = [{ "name": "About", "path": "/About" },
+    { "name": "Events", "path": "/Events" },
+    { "..name": "Resources", "path": "/Resources", "children": [{ "name": "Sermons", "children": [], "path": "/Resources/Sermons" },
+            { "name": "Tracts", "children": [], "path": "/Resources/Tracts" }
+        ] },
+    { "name": "Contact", "path": "/Contact" },
+    { "name": "SOF", "path": "/SOF" }
+];
+
+define(function() { return function inject(app) {
+    debugger;
+    var Component = app.services.UI.Component;
+    var Context = app.Context;
+    return /** @class */ (function (_super) {
+        __extends(Menus, _super);
+        function Menus() {
+            var _this = _super.call(this) || this;
+            _this.state = { burgerActive: false };
+            _this.burgerClick = _this.burgerClick.bind(_this);
+            return _this;
+        }
+        Menus.prototype.burgerClick = function () {
+            this.setState({ burgerActive: !this.state.burgerActive });
+        };
+        Menus.prototype.navigate = function (url) {
+            history["pushState"](null, Context.state.bookmark, url + Context.state.bookmark);
+            Context.setState({ "url": url });
+            if (event)
+                event.preventDefault();
+        };
+        Menus.prototype.render = function () {
+            var _this = this;
+            var navigate = this.navigate;
+            return _super.prototype.render.call(this, ["Bulma.Navbar",
+                { "className": "is-transparent", "style": { "maxWidth": "1000px", "align": "center", "margin": "auto" } },
+                [["div",
+                        { className: "navbar-brand" },
+                        [["a", { onClick: function () { return _this.navigate('/'); } }, [["img", { "src": "./images/logo.png", style: { "height": "64px" } }]]],
+                            ["Bulma.NavbarBurger", { "className": this.state.burgerActive ? 'is-active' : '', onClick: this.burgerClick }],
+                            ["Bulma.NavbarMenu", { id: "navbarMain", "className": this.state.burgerActive ? ' is-active' : '' },
+                                [["Bulma.NavbarStart",
+                                        {},
+                                        menus.filter(function (x) { return x.name; }).map(function (x) { return x.children && x.children.length > 0 ? ["Bulma.NavbarItem",
+                                            { className: ((location.pathname == x.path) ? " is-active" : "") },
+                                            [["a", { className: "navbar-link", href: x.path }, [[location.pathname == x.path ? "em" : "span", {}, [["Label", {}, x.name]]]]],
+                                                ["Bulma.NavbarDropdown", {}, x.children.map(function (y) { return ["a", { className: "navbar-item", onClick: function () { return navigate(y.path); } }, [[location.pathname == x.path ? "em" : "span", {}, [["Label", {}, y.name]]]]]; })
+                                                ]]
+                                        ]
+                                            : ["a",
+                                                { className: "navbar-item" + ((location.pathname == x.path) ? " is-active" : ""), href: x.path, onClick: function () { return navigate(x.path); } },
+                                                [[location.pathname == x.path ? "em" : "span", {}, [["Label", {}, x.name]]]]]; })
+                                    ],
+                                    ["Bulma.NavbarEnd",
+                                        {},
+                                        [["Bulma.NavbarItem",
+                                                {},
+                                                [["Bulma.NavbarLink", {}, [["Label", {}, "Language"]]],
+                                                    ["Bulma.NavbarDropdown", {}, languages.map(function (y) { return ["a", { className: "navbar-item " + (Context.state.lang === y.id ? "is-active" : ""), onClick: function () { return Context.setState({ "lang": y.id }); } }, [["Label", {}, y.name]]]; })]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]]
+            ]);
+        };
+        return Menus;
+    }(Component));
+};});
+

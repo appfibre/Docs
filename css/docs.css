@@ -1,0 +1,33 @@
+.fd-main {
+  
+  /*min-height: calc(100vh - 40px);
+  position: relative;
+  display: flex;
+  overflow: hidden;*/
+  
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+
+.fd-side {
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  height: 100%;
+  overflow-Y: scroll;
+  
+  border-right: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+}
+
+
+.fd-content {
+  margin: 5px;
+  -webkit-box-ordinal-group: 2;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-ordinal-group: 2;      /* OLD - Firefox 19- */
+  -ms-flex-order: 2;              /* TWEENER - IE 10 */
+  -webkit-order: 2;               /* NEW - Chrome */
+  order: 2; 
+}

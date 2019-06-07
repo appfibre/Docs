@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+    //(this.Set && Object.assign && this.Promise) || document.write('<script src="./cdn/rollup-plugin-jst/systemjs-jst-polyfill.js"><\/script>');
+        (this.Set && Object.assign && this.Promise) || document.write('<script src="./cdn/app/app-systemjs-polyfill.js"><\/script>');
+</script>
+<script src="cdn/react/umd/react.development.js"></script>
+<script src="cdn/react-dom/umd/react-dom.development.js"></script>
+<!--script src="cdn/rollup-plugin-jst/systemjs-jst.js"></script-->
+<script src="cdn/app/app-systemjs.js"></script>
+<link rel="StyleSheet" href="css/main.css" />
+<link rel="StyleSheet" href="css/docs.css" />
+<script>
+    System.import('./app.json').catch(document.write);
+</script>

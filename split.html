@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.rawgit.com/lingtalfi/simpledrag/master/simpledrag.js"></script>
+
+    <style type="text/css">
+
+        html, body {
+            height: 100%;
+            margin: 0px;
+        }
+
+        .panes-container {
+            display: -webkit-box;
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .left-pane,.right-pane {
+            background: #ccc;
+        }
+
+        .panes-separator {
+            width: 3px;
+            background: darkgrey;
+            border: 1px solid grey;
+            position: relative;
+            cursor: col-resize;
+        }
+
+        .center-pane {
+            background: #eee;
+        }
+
+        .panes-container,
+        .panes-separator,
+        .left-pane,
+        .right-pane,
+        .center-pane {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="panes-container">
+    <div class="left-pane" style="width: 300px" id="left-pane">
+        <p>I'm the left pane</p>
+        <ul>
+            <li><a href="#">Item 1</a></li>
+            <li><a href="#">Item 2</a></li>
+            <li><a href="#">Item 3</a></li>
+        </ul>
+    </div>
+    <div class="panes-separator" id="panes-separator"></div>
+    <div class="center-pane" id="center-pane">
+      <p><a href="https://github.com/lingtalfi/simpledrag">https://github.com/lingtalfi/simpledrag</a></p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium at cum cupiditate dolorum, eius eum
+            eveniet facilis illum maiores molestiae necessitatibus optio possimus sequi sunt, vel voluptate. Asperiores,
+            voluptate!
+        </p>
+    </div>
+    <div class="panes-separator" id="panes-separator2"></div>
+    <div class="right-pane" style="width: 300px" id="right-pane">
+        <p>I'm the right pane</p>
+        <ul>
+            <li><a href="#">Item 1</a></li>
+            <li><a href="#">Item 2</a></li>
+            <li><a href="#">Item 3</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+
+
+    var leftPane = document.getElementById('left-pane');
+    var centerPane = document.getElementById('center-pane');
+    var rightPane = document.getElementById('right-pane');
+    var paneSep = document.getElementById('panes-separator');
+    var paneSep2 = document.getElementById('panes-separator2');
+
+
+    paneSep.sdrag(function resizeHorizontal(el, pageX, startX, pageY, startY, fix) { resizeInner(el, pageX, startX, pageY, startY, fix, 200, 700, leftPane, centerPane, false);}, null, 'horizontal');
+    paneSep2.sdrag(function resizeHorizontal(el, pageX, startX, pageY, startY, fix) { resizeInner(el, pageX, startX, pageY, startY, fix, 200, 700, rightPane, centerPane, true); }, null, 'horizontal');  
+    
+
+
+    function resizeInner(el, pageX, startX, pageY, startY, fix, min, max, a, space, inverse) {
+        fix.skipX = true;
+/*
+        if (pageX < window.innerWidth * min / 100) {
+            pageX = window.innerWidth * min / 100;
+            fix.pageX = pageX;
+        }
+        if (pageX > window.innerWidth * max / 100) {
+            pageX = window.innerWidth * max / 100;
+            fix.pageX = pageX;
+        }
+
+        var cur = pageX / window.innerWidth * 100;
+        if (cur < 0) {
+            cur = 0;
+        }
+        if (cur > window.innerWidth) {
+            cur = window.innerWidth;
+        }*/
+
+        //var right = (100-cur-2);
+        //a.style.width = cur + '%';
+        //b.style.width = right + '%';
+        if (min) pageX = Math.max(min, pageX);
+        if (max) pageX = Math.min(max, pageX);
+        
+        var increase =  (inverse ? window.innerWidth - pageX : pageX) - a.clientWidth;
+        a.style.width = (inverse ? window.innerWidth - pageX : pageX) + 'px';
+        space.style.width = (space.clientWidth - increase) + 'px';
+    }
+
+</script>
+
+</body>
+</html>

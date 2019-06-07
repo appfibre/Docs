@@ -1,0 +1,12 @@
+{ ".app": {".require": "./layout.json#default"}
+, "options": { "logLevel": "Warn", "title": "appfibre"}
+, "components": {".require": "./scripts/components.js"}
+, "util": {".require": "./scripts/util.js"}
+, "controllers": 
+     { "designer": 
+        { "match": {".code": "new RegExp(/(designer.html)(?:(.+\\?)?)([^#]*)((?:#)(.*))?$/i)"}
+        , "resolve": {".function": null, "return": {".require": "./test.json#default"} }
+        }
+      , "index": { "resolve":  {".function": null, "return": {".code": "this.main"}}}
+      }
+}

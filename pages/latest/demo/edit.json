@@ -1,0 +1,39 @@
+[
+    "table"
+    , { "style": {"width": "100%"}, "cellSpacing": "2px", "cellPadding": "2px" }
+    , [ [ "thead"
+        , {}
+        , [ [ "tr"
+            , {}
+            , [
+                ["th", {}, "File" ],
+                ["th", {}, "Content"  ]
+              ]
+            ]
+          ]
+        ],
+
+        [ "tbody"
+            , {}
+            , [ [ "tr"
+                , {}
+                , [ ["td", {}, "test.js" ]
+                  , ["td", {}, {".require": "./files/test.js"} ]
+                  ]
+                ]
+              , [ "tr"
+                , {}
+                , [ ["td", {}, "test.json" ]
+                  , ["td", {}, {".require": "./files/test.json"} ]
+                  ]
+                ]
+              , [ "tr"
+                  , {}
+                  , [ ["td", {}, "test.txt" ]
+                    , ["td", {}, {".require": "./files/test.txt"} ]
+                    ]
+                    ]
+                ]
+        ]
+      ]
+]
