@@ -50,9 +50,13 @@
                 {"name":"Download", "path": "download"}
             ] 
         },
-        {  "title": "Demos", "name":"demo", "path": "demo", "content": "./pages/latest/demo/index.json"}
+        {  "title": "Demos", "name":"demo", "path": "demo", "content": "./pages/latest/demo/index.json", "children": 
+            [
+                {"title":"Edit", "name":"edit", "path": "edit", "content": "./pages/latest/demo/edit.json"}
+            ]
+        }
         ,
-        {  "title": "Support", "name":"support", "path": "suppoer", "children": 
+        {  "title": "Support", "name":"support", "path": "support", "children": 
             [
                 {"name":"Contribute", "path": "contribute"},
                 {"name":"Dependancies", "path": "dependancies"},

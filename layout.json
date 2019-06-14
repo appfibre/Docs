@@ -1,15 +1,20 @@
-["div"
-, null
-, [ [ "div"
+[ "div"
+, {}  
+, [   [ "link", {"rel": "StyleSheet", "href": "css/main.css"}]
+    , [ "link", {"rel": "StyleSheet", "href": "css/docs.css"}]
+    , [ "div"
         , {}
-        , [ [ "Navigation.Container"
-            , {}
-            , [ [ "Layout.Menus" ]
-              , [ "div", { "className": "fd-main"}, [[ "Layout.Main" ]] ]
-              ] 
-            ] 
+        , [ [ "Data.bind"
+            , "./pages/sitemap.json"
+            ,   [[ "Navigation.Container"
+                , {}
+                , [ [ "Layout.Menus", {"bind": "default"} ]
+                  , [ "div", { "className": "fd-main"}, [[ "Layout.Main", {"bind": "default"} ]] ]
+                  ] 
+                ]]
+            ]
         ]
       ] 
-    , [ "nav", { "style": { "textAlign": "center"}, "key": 2}, [ [ "i", { "style": {"position": "relative", "top": "5px"} , "key":3}, "fibre - 2019" ] ] ]
+    , [ "nav", { "style": { "textAlign": "center"}}, [ [ "i", { "style": {"position": "relative", "top": "5px"} , "key":3}, "fibre - 2019" ] ] ]
   ]
 ]

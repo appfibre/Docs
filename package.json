@@ -1,0 +1,11 @@
+{
+  "name": "@appfibre/docs",
+  "version": "0.0.1",
+  "description": "AppFibre Documentation",
+  "devDependancies": {
+    "@appfibre/types": "^0.0.1"
+  },
+  "private": true,
+  "author": "Soleil De Gloria",
+  "license": "MIT"
+}
