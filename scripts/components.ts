@@ -104,7 +104,7 @@ var CodeMirror = function transform(this:any, a:attributes, c:children) {
 
 var Designer = function transform(this:appfibre.webapp.IWebAppLoaded, a:attributes, c:children) {
     var app = this;
-    return new Promise(function (r:Function, f:Function) { app.services.moduleSystem.import('./scripts/appfibre/webapp-components-designer.js#Designer').then( (o:{default:any}) => r([o.default, a, c]), (e:Error) => r(["div", {}, "Unable to load designer: " + e.stack])) });
+    return new Promise(function (r:Function, f:Function) { app.services.moduleSystem.import('@appfibre/webcomponents-appfibre.cjs.js#Designer').then( (o:{default:any}) => r([o.default, a, c]), (e:Error) => r(["div", {}, "Unable to load designer: " + e.stack])) });
 }
 
 var Transformer = function transform(this:appfibre.webapp.IWebAppLoaded, a:attributes&{value:any}, c:children) {

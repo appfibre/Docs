@@ -1,5 +1,5 @@
 { ".app": {".require": "./layout.json"}
-, "settings": { "logLevel": "Warn", "title": "appfibre", "fullHeight": "100%", "cdn": { "@cdnjs": "https://cdnjs.cloudflare.com/ajax/libs" }}
+, "settings": { "logLevel": "Warn", "title": "appfibre", "fullHeight": "100%", "cdn": { "@cdnjs": "https://cdnjs.cloudflare.com/ajax/libs", "@appfibre": "https://unpkg.com/@appfibre/bundles@0.0.2" }}
 , "components": {".require": "./scripts/components.js"}
 , "util": {".require": "./scripts/util.js"}
 , "controllers": 

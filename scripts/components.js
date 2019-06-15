@@ -89,7 +89,7 @@
     exports.CodeMirror = CodeMirror;
     var Designer = function transform(a, c) {
         var app = this;
-        return new Promise(function (r, f) { app.services.moduleSystem["import"]('./scripts/appfibre/webapp-components-designer.js#Designer').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack]); }); });
+        return new Promise(function (r, f) { app.services.moduleSystem["import"]('@appfibre/webcomponents-appfibre.umd.js#Designer').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack]); }); });
     };
     exports.Designer = Designer;
     var Transformer = function transform(a, c) {
