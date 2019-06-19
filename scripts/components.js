@@ -1,3 +1,16 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
@@ -89,7 +102,7 @@
     exports.CodeMirror = CodeMirror;
     var Designer = function transform(a, c) {
         var app = this;
-        return new Promise(function (r, f) { app.services.moduleSystem["import"]('@appfibre/webcomponents-appfibre.cjs.js#Designer').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack]); }); });
+        return new Promise(function (r, f) { app.services.moduleSystem["import"]('@appfibre/webcomponents-appfibre.umd.js#Designer').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack]); }); });
     };
     exports.Designer = Designer;
     var Transformer = function transform(a, c) {
@@ -138,8 +151,8 @@
                     return s > -1 ? findMenu(fullpath.substr(s + 1), parent[z].children) : parent[z];
         return "Could not find " + p + ' within ' + JSON.stringify(parent);
     }
-    var Layout = { Menus: function transform(props) {
-            var path = this.services.navigation.current.path || '';
+    var Layout = { Menus: function inject(app) {
+            var path = app.services.navigation.current.path || '';
             function constructMenus(menuItems, level, maxLevel, parent) {
                 var p = parent || '';
                 return menuItems.map(function (x, i) {
@@ -158,29 +171,41 @@
                         return ["Navigation.a", { className: "navbar-item" + (path == (p + x.path) ? " is-active" : ""), href: '?' + p + x.path }, [[path == (p + x.path) ? "em" : "span", {}, x.title || x.name]]];
                 });
             }
-            return ["Bulma.Navbar",
-                { "className": "is-transparent", "style": { "margin": "auto", "background": "gray" }, "aria-label": "main navigation" },
-                [["div",
-                        { className: "navbar-brand" },
-                        [["Navigation.a", { className: "navbar-item", style: { font: "16pt Times New Roman" }, href: '/' }, [["i", { style: { "color": "#DFDFDF" } }, "app"], ["i", { style: { "color": "#FFDF00" } }, "f"], ["i", { style: { "color": "#DFDFDF" } }, "ibre"]]],
-                            ["Bulma.NavbarBurger", { "className": /*this.state.burgerActive ?*/ false ? 'is-active' : '' /*, onClick: this.burgerClick*/ }],
-                            ["Bulma.NavbarMenu", { id: "navbarMain", "className": /*this.state.burgerActive*/ false ? ' is-active' : '' },
-                                [["Bulma.NavbarStart", {}, constructMenus(props.value, 0, 1)]
-                                    /*, ["Bulma.NavbarEnd",
-                                            {},
-                                            [["Bulma.NavbarItem",
+            return /** @class */ (function (_super) {
+                __extends(Menus, _super);
+                function Menus() {
+                    var _this = _super.call(this) || this;
+                    _this.state = { burgerActive: false };
+                    return _this;
+                }
+                Menus.prototype.render = function () {
+                    var _this = this;
+                    return _super.prototype.render.call(this, ["Bulma.Navbar",
+                        { "className": "is-transparent", "style": { "margin": "auto", "background": "gray" }, "aria-label": "main navigation" },
+                        [["div",
+                                { className: "navbar-brand" },
+                                [["Navigation.a", { className: "navbar-item", style: { font: "16pt Times New Roman" }, href: '/' }, [["i", { style: { "color": "#DFDFDF" } }, "app"], ["i", { style: { "color": "#FFDF00" } }, "f"], ["i", { style: { "color": "#DFDFDF" } }, "ibre"]]],
+                                    ["Bulma.NavbarBurger", { "className": this.state.burgerActive ? 'is-active' : '', onClick: function () { _this.setState({ burgerActive: !_this.state.burgerActive }); } }],
+                                    ["Bulma.NavbarMenu", { id: "navbarMain", "className": this.state.burgerActive ? ' is-active' : '' },
+                                        [["Bulma.NavbarStart", {}, constructMenus(this.props.value, 0, this.state.burgerActive ? 0 : 1)]
+                                            /*, ["Bulma.NavbarEnd",
                                                     {},
-                                                    [["Bulma.NavbarLink", {}, [["Label", {}, "Language"]]],
-                                                        ["Bulma.NavbarDropdown", {}, languages.map(function (y) { return ["a", { className: "navbar-item " + (Context.state.lang === y.id ? "is-active" : ""), onClick: function () { return Context.setState({ "lang": y.id }); } }, [["Label", {}, y.name]]]; })]
+                                                    [["Bulma.NavbarItem",
+                                                            {},
+                                                            [["Bulma.NavbarLink", {}, [["Label", {}, "Language"]]],
+                                                                ["Bulma.NavbarDropdown", {}, languages.map(function (y) { return ["a", { className: "navbar-item " + (Context.state.lang === y.id ? "is-active" : ""), onClick: function () { return Context.setState({ "lang": y.id }); } }, [["Label", {}, y.name]]]; })]
+                                                            ]
+                                                        ]
                                                     ]
-                                                ]
-                                            ]
-                                        ]*/
+                                                ]*/
+                                        ]
+                                    ]
                                 ]
-                            ]
-                        ]
-                    ]]
-            ];
+                            ]]
+                    ]);
+                };
+                return Menus;
+            }(app.services.UI.Component));
         },
         Main: function transform(props) {
             var app = this;
