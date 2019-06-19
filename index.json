@@ -1,7 +1,6 @@
 { ".app": {".require": "./layout.json"}
-, "settings": { "logLevel": "Warn", "title": "appfibre", "fullHeight": "100%", "cdn": { "@cdnjs": "https://cdnjs.cloudflare.com/ajax/libs", "@appfibre": "https://unpkg.com/@appfibre/bundles@0.0.2" }}
+, "settings": { "logLevel": "Warn", "title": "appfibre", "fullHeight": "100%", "cdn": {".require": "./scripts/loader.js"}}
 , "components": {".require": "./scripts/components.js"}
-, "util": {".require": "./scripts/util.js"}
 , "controllers": 
      { "designer": 
         { "match": {".code": "new RegExp(/(designer.html)(?:(.+\\?)?)([^#]*)((?:#)(.*))?$/i)"}
