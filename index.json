@@ -1,11 +1,12 @@
-{ ".app": {".require": "./layout.json"}
-, "settings": { "logLevel": "Warn", "title": "appfibre", "fullHeight": "100%", "cdn": {".require": "./scripts/loader.js"}}
-, "components": {".require": "./scripts/components.js"}
+{ ".app": {".import": "./layout.json"}
+, "settings": { "logLevel": "Warn", "title": "appfibre", "fullHeight": true, "cdn": {".import": "./scripts/loader.js"}}
+, "components": {".import": "./scripts/components.js"}
 , "controllers": 
      { "designer": 
-        { "match": {".code": "new RegExp(/(designer.html)(?:(.+\\?)?)([^#]*)((?:#)(.*))?$/i)"}
+        { "match": {".": "new RegExp(/(designer.html)(?:(.+\\?)?)([^#]*)((?:#)(.*))?$/i)"}
         , "resolve": {".function": null, "return": ["Designer"]}
         }
-      , "index": { "resolve":  {".function": null, "return": {".code": "this.main"}}}
+      , "index": { "resolve":  {".function": null, "return": {".": "this.main"}}}
       }
+, "services": { "..UI": {"import": "@appfibre/webapp#HtmlUI" } }
 }

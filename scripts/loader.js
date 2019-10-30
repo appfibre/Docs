@@ -12,7 +12,7 @@
 					  ].map(function(src) { var s = document.createElement('script'); s.src = src; return s; });
 		function ph1() { document.head.appendChild(scripts[1]); document.head.appendChild(scripts[2]);  }
 		function ph2() { if (window.React && window.ReactDOM) document.head.appendChild(scripts[3]); };
-		function ph3() { System.import('/index.json').then(function (a) { a.default.run(); }); }
+		function ph3() { System.import('./index.json').then(function (a) { a.default.run(); }); }
 		scripts[0].onload = ph1;
 		scripts[1].onload = scripts[2].onload = ph2;
 		scripts[3].onload = ph3;

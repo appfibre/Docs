@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -95,14 +95,22 @@ var __extends = (this && this.__extends) || (function () {
     /*var CodeMirror = function inject(app) {
         return new Promise(function (r, f) { app.services.moduleSystem.import('./scripts/codemirror.js').then(function(o) { r(o.default)})});
     }*/
-    var CodeMirror = function transform(a, c) {
+    /*
+    var CodeMirror = function transform(this:any, a:attributes, c:children) {
         var app = this;
-        return new Promise(function (r, f) { return app.services.moduleSystem["import"]('./scripts/codemirror.js').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack]); }); });
+        return new Promise((r:Function, f:Function) => app.services.moduleSystem.import('./scripts/codemirror.js').then( (o:{default:any}) => r([o.default, a,c] )
+                                                                                                                       , (e:Error) => r(["div", {}, "Unable to load designer: " + e.stack || e])
+                                                                                                                       ));
+    }*/
+    var CodeMirror = function inject(app) {
+        return new Promise(function (r) { app.services.moduleSystem["import"]('@appfibre/webcomponents-codemirror.umd.js').then(function (o) { [r(o["default"])]; }); });
+        //return new Promise(function (r:any) { app.services.moduleSystem.import('@appfibre/webcomponents-codemirror.umd.js').then(function(o) { debugger; [r(o)];})});
+        //return app.services.moduleSystem.import('@appfibre/webcomponents-codemirror.umd.js');
     };
     exports.CodeMirror = CodeMirror;
     var Designer = function transform(a, c) {
         var app = this;
-        return new Promise(function (r, f) { app.services.moduleSystem["import"]('@appfibre/webcomponents-appfibre.umd.js#Designer').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack]); }); });
+        return new Promise(function (r, f) { app.services.moduleSystem["import"]('@appfibre/webcomponents-appfibre.umd.js#appfibre#Designer').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack || e]); }); });
     };
     exports.Designer = Designer;
     var Transformer = function transform(a, c) {
@@ -173,8 +181,8 @@ var __extends = (this && this.__extends) || (function () {
             }
             return /** @class */ (function (_super) {
                 __extends(Menus, _super);
-                function Menus() {
-                    var _this = _super.call(this) || this;
+                function Menus(props) {
+                    var _this = _super.call(this, props) || this;
                     _this.state = { burgerActive: false };
                     return _this;
                 }

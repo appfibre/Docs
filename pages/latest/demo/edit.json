@@ -18,21 +18,39 @@
             , [ [ "tr"
                 , {}
                 , [ ["td", {}, "test.js" ]
-                  , ["td", {}, {".require": "./files/test.js"} ]
+                  , ["td", {}, {".import": "./files/test.js"} ]
                   ]
                 ]
               , [ "tr"
                 , {}
                 , [ ["td", {}, "test.json" ]
-                  , ["td", {}, {".require": "./files/test.json"} ]
+                  , ["td", {}, {".import": "./files/test.json"} ]
                   ]
                 ]
-              , [ "tr"
+                , [ "tr"
                   , {}
                   , [ ["td", {}, "test.txt" ]
-                    , ["td", {}, {".require": "./files/test.txt"} ]
+                    , ["td", {}, {".import": "./files/test.txt"} ]
                     ]
                     ]
+                , [ "tr"
+                  , {}
+                  , [ ["td", {}, "test2.json" ]
+                    , ["td", {}, {".import": "./files/test2.json"} ]
+                    ]
+                    ]
+                , [ "tr"
+                  , {}
+                  , [ ["td", {}, "test2.json" ]
+                    , ["td", {}, {".import": "./files/test2.json"} ]
+                    ]
+                    ]
+                  , [ "tr"
+                    , {}
+                    , [ ["td", {}, "element.json" ]
+                      , ["td", {}, [{".import": "./files/element.json"}] ]
+                      ]
+                      ]
                 ]
         ]
       ]

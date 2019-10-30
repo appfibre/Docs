@@ -94,17 +94,23 @@ var NavbarDropdown = function transform(a:attributes, c:children) {
 /*var CodeMirror = function inject(app) {
     return new Promise(function (r, f) { app.services.moduleSystem.import('./scripts/codemirror.js').then(function(o) { r(o.default)})});
 }*/
-
+/*
 var CodeMirror = function transform(this:any, a:attributes, c:children) {
     var app = this;
     return new Promise((r:Function, f:Function) => app.services.moduleSystem.import('./scripts/codemirror.js').then( (o:{default:any}) => r([o.default, a,c] )
-                                                                                                                   , (e:Error) => r(["div", {}, "Unable to load designer: " + e.stack])
+                                                                                                                   , (e:Error) => r(["div", {}, "Unable to load designer: " + e.stack || e])
                                                                                                                    ));
+}*/
+
+var CodeMirror = function inject(app:appfibre.webapp.IWebAppLoaded) {
+    return new Promise(function (r:any) { app.services.moduleSystem.import('@appfibre/webcomponents-codemirror.umd.js').then(function(o) { [r(o.default)];})});
+    //return new Promise(function (r:any) { app.services.moduleSystem.import('@appfibre/webcomponents-codemirror.umd.js').then(function(o) { debugger; [r(o)];})});
+    //return app.services.moduleSystem.import('@appfibre/webcomponents-codemirror.umd.js');
 }
 
 var Designer = function transform(this:appfibre.webapp.IWebAppLoaded, a:attributes, c:children) {
     var app = this;
-    return new Promise(function (r:Function, f:Function) { app.services.moduleSystem.import('@appfibre/webcomponents-appfibre.umd.js#Designer').then( (o:{default:any}) => r([o.default, a, c]), (e:Error) => r(["div", {}, "Unable to load designer: " + e.stack])) });
+    return new Promise(function (r:Function, f:Function) { app.services.moduleSystem.import('@appfibre/webcomponents-appfibre.umd.js#appfibre#Designer').then( (o:{default:any}) => r([o.default, a, c]), (e:Error) => r(["div", {}, "Unable to load designer: " + e.stack || e])) });
 }
 
 var Transformer = function transform(this:appfibre.webapp.IWebAppLoaded, a:attributes&{value:any}, c:children) {
@@ -189,8 +195,8 @@ var Layout = { Menus: function inject(app:appfibre.webapp.IWebAppLoaded):any {
                         return class Menus extends app.services.UI.Component<{value: menus}, {burgerActive:boolean}> {
                         state:{burgerActive:boolean}
 
-                        constructor() {
-                            super();
+                        constructor(props:{value:menus}) {
+                            super(props);
                             this.state = {burgerActive: false};
                         }
 

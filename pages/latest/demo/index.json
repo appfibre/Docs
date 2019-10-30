@@ -3,9 +3,9 @@
     ,  {"style": {"minHeight": "calc(100vh - 100px)"}}
     ,   [
            [ "Data.bind"
-            , {  "jst": "{ \".app\": {\".require\": \"./layout.json#default\"}\n, \"settings\": { \"logLevel\": \"Warning\", \"title\": \"appfibre\"}\n, \"components\": {\".require\": \"./scripts/components.js\"}\n}"}
+            , {  "jst": "{ \".app\": {\".import\": \"./layout.json#default\"}\n, \"settings\": { \"logLevel\": \"Warning\", \"title\": \"appfibre\"}\n, \"components\": {\".import\": \"./scripts/components.js\"}\n}"}
             ,   [
-                    [ "CodeMirror", { "bind": "jst", "settings": {"matchBrackets": true, "continueComments": "Enter", "lineNumbers": true, "mode": "application/ld+json", "lineWrapping": true} } ]
+                    [ { ".import": "@appfibre/webcomponents-codemirror.umd.js"}, { "bind": "jst", "settings": {"matchBrackets": true, "continueComments": "Enter", "lineNumbers": true, "mode": "application/ld+json", "lineWrapping": true} } ]
                 ,   [ "Transformer", { "bind": "jst"}]
                 ]
             ]
