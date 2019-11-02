@@ -5,7 +5,7 @@
            [ "Data.bind"
             , {  "jst": "{ \".app\": {\".import\": \"./layout.json#default\"}\n, \"settings\": { \"logLevel\": \"Warning\", \"title\": \"appfibre\"}\n, \"components\": {\".import\": \"./scripts/components.js\"}\n}"}
             ,   [
-                    [ { ".import": "@appfibre/webcomponents-codemirror.umd.js"}, { "bind": "jst", "settings": {"matchBrackets": true, "continueComments": "Enter", "lineNumbers": true, "mode": "application/ld+json", "lineWrapping": true} } ]
+                    [ { ".import": "@appfibre/umd/webcomponents-codemirror.js"}, { "bind": "jst", "settings": {"matchBrackets": true, "continueComments": "Enter", "lineNumbers": true, "mode": "application/ld+json", "lineWrapping": true} } ]
                 ,   [ "Transformer", { "bind": "jst"}]
                 ]
             ]

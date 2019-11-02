@@ -110,7 +110,7 @@ var __extends = (this && this.__extends) || (function () {
     exports.CodeMirror = CodeMirror;
     var Designer = function transform(a, c) {
         var app = this;
-        return new Promise(function (r, f) { app.services.moduleSystem["import"]('@appfibre/webcomponents-appfibre.umd.js#appfibre#Designer').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack || e]); }); });
+        return new Promise(function (r, f) { app.services.moduleSystem["import"]('@appfibre/umd/webcomponents-appfibre.js#appfibre#Designer').then(function (o) { return r([o["default"], a, c]); }, function (e) { return r(["div", {}, "Unable to load designer: " + e.stack || e]); }); });
     };
     exports.Designer = Designer;
     var Transformer = function transform(a, c) {
